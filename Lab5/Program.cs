@@ -182,32 +182,52 @@ public class Program
         }
         return row;
     }
+    public void remove(ref int[,] matrix, int index)
+{
+    int[,] matrix2 = new int[matrix.GetLength(0) - 1, matrix.GetLength(1)];
+    for (int i = 0; i < matrix2.GetLength(0); i++)
+    {
+        for (int j = 0; j < matrix.GetLength(1); j++)
+        {
+            if (i < index)
+                matrix2[i, j] = matrix[i, j];
+            else
+            {
+                matrix2[i, j] = matrix[i + 1, j];
+            }
+        }
+    }
+    matrix = matrix2;
+}
     public void Task_2_3(ref int[,] B, ref int[,] C)
     {
         // code here
-        int[,] newB = new int[B.GetLength(0) - 1, B.GetLength(1)];
-        int[,] newC = new int[C.GetLength(0) - 1, C.GetLength(1)];
-        int brow, crow;
-        brow = FindDiagonalMaxIndex(B);
-        crow = FindDiagonalMaxIndex(C);
-        for (int i = 0; i < 4; i++)
-        {
-            for (int j = 0; j < 5; j++)
-            {
-                if (i < brow) newB[i, j] = B[i, j];
-                else newB[i, j] = B[i + 1, j];
-            }
-        }
-        for (int i = 0; i < 5; i++)
-        {
-            for (int j = 0; j < 6; j++)
-            {
-                if (i < crow) newC[i, j] = C[i, j];
-                else newC[i, j] = C[i + 1, j];
-            }
-        }
-        B = newB;
-        C = newC;
+        //int[,] newB = new int[B.GetLength(0) - 1, B.GetLength(1)];
+//int[,] newC = new int[C.GetLength(0) - 1, C.GetLength(1)];
+int brow, crow;
+brow = FindDiagonalMaxIndex(B);
+crow = FindDiagonalMaxIndex(C);
+//for (int i = 0; i < 4; i++)
+//{
+//    for (int j = 0; j < 5; j++)
+//    {
+//        if (i < brow) newB[i, j] = B[i, j];
+//        else newB[i, j] = B[i + 1, j];
+//    }
+//}
+//for (int i = 0; i < 5; i++)
+//{
+//    for (int j = 0; j < 6; j++)
+//    {
+//        if (i < crow) newC[i, j] = C[i, j];
+//        else newC[i, j] = C[i + 1, j];
+//    }
+//}
+remove(ref B, brow);
+remove(ref C, crow);
+
+//B = newB;
+//C = newC;
         //  create and use method FindDiagonalMaxIndex(matrix);
 
         // end
